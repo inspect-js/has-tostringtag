@@ -21,6 +21,7 @@
 	"main": "index.js",
 	"exports": {
 		".": "./index.js",
+		"./shams": "./shams.js",
 		"./package.json": "./package.json"
 	},
 	"scripts": {
@@ -41,5 +42,11 @@
 		"symbols",
 		"tostringtag",
 		"Symbol.toStringTag"
-	]
+	],
+	"dependencies": {
+		"has-symbols": "^1.0.2"
+	},
+	"engines": {
+		"node": ">= 0.4"
+	}
 }
