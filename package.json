@@ -34,7 +34,9 @@
 		"test:shams": "npm run --silent test:shams:getownpropertysymbols && npm run --silent test:shams:corejs",
 		"test:shams:corejs": "nyc node test/shams/core-js.js",
 		"test:shams:getownpropertysymbols": "nyc node test/shams/get-own-property-symbols.js",
-		"lint": "eslint --ext=js,mjs ."
+		"lint": "eslint --ext=js,mjs .",
+		"version": "auto-changelog && git add CHANGELOG.md",
+		"postversion": "auto-changelog && git add CHANGELOG.md && git commit --no-edit --amend && git tag -f \"v$(node -e \"console.log(require('./package.json').version)\")\""
 	},
 	"repository": {
 		"type": "git",
@@ -58,6 +60,7 @@
 	"devDependencies": {
 		"@ljharb/eslint-config": "^17.6.0",
 		"aud": "^1.1.5",
+		"auto-changelog": "^2.3.0",
 		"core-js": "^2.6.12",
 		"eslint": "^7.32.0",
 		"get-own-property-symbols": "^0.9.5",
@@ -66,5 +69,13 @@
 	},
 	"engines": {
 		"node": ">= 0.4"
+	},
+	"auto-changelog": {
+		"output": "CHANGELOG.md",
+		"template": "keepachangelog",
+		"unreleased": false,
+		"commitLimit": false,
+		"backfillLimit": false,
+		"hideCredit": true
 	}
 }
