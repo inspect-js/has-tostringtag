@@ -1,0 +1,45 @@
+{
+	"name": "has-tostringtag",
+	"version": "0.0.0",
+	"author": {
+		"name": "Jordan Harband",
+		"email": "ljharb@gmail.com",
+		"url": "http://ljharb.codes"
+	},
+	"funding": {
+		"url": "https://github.com/sponsors/ljharb"
+	},
+	"contributors": [
+		{
+			"name": "Jordan Harband",
+			"email": "ljharb@gmail.com",
+			"url": "http://ljharb.codes"
+		}
+	],
+	"description": "Determine if the JS environment has `Symbol.toStringTag` support. Supports spec, or shams.",
+	"license": "MIT",
+	"main": "index.js",
+	"exports": {
+		".": "./index.js",
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/inspect-js/has-tostringtag.git"
+	},
+	"bugs": {
+		"url": "https://github.com/inspect-js/has-tostringtag/issues"
+	},
+	"homepage": "https://github.com/inspect-js/has-tostringtag#readme",
+	"keywords": [
+		"javascript",
+		"ecmascript",
+		"symbol",
+		"symbols",
+		"tostringtag",
+		"Symbol.toStringTag"
+	]
+}
