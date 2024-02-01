@@ -19,9 +19,22 @@
 	"description": "Determine if the JS environment has `Symbol.toStringTag` support. Supports spec, or shams.",
 	"license": "MIT",
 	"main": "index.js",
+	"types": "./index.d.ts",
 	"exports": {
-		".": "./index.js",
-		"./shams": "./shams.js",
+		".": [
+			{
+				"types": "./index.d.ts",
+				"default": "./index.js"
+			},
+			"./index.js"
+		],
+		"./shams": [
+			{
+				"types": "./shams.d.ts",
+				"default": "./shams.js"
+			},
+			"./shams.js"
+		],
 		"./package.json": "./package.json"
 	},
 	"scripts": {
@@ -59,6 +72,8 @@
 	],
 	"devDependencies": {
 		"@ljharb/eslint-config": "^21.1.0",
+		"@types/has-symbols": "^1.0.2",
+		"@types/tape": "^5.6.4",
 		"aud": "^2.0.4",
 		"auto-changelog": "^2.4.0",
 		"core-js": "^2.6.12",
@@ -69,7 +84,8 @@
 		"npmignore": "^0.3.1",
 		"nyc": "^10.3.2",
 		"safe-publish-latest": "^2.0.0",
-		"tape": "^5.7.4"
+		"tape": "^5.7.4",
+		"typescript": "next"
 	},
 	"engines": {
 		"node": ">= 0.4"
