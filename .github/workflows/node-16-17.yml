@@ -1,4 +1,4 @@
-name: 'Tests: node.js (v16+)'
+name: 'Tests: node.js (v16 - v17)'
 
 on: [pull_request, push]
 
@@ -13,7 +13,7 @@ jobs:
         id: set-matrix
         with:
           versionsAsRoot: true
-          preset: '>=16'
+          preset: '^16 || ^17'
 
   latest:
     needs: [matrix]
@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: ${{ fromJson(needs.matrix.outputs.latest) }}
         command:
@@ -29,13 +30,13 @@ jobs:
           - test:shams:getownpropertysymbols
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ljharb/actions/node/install@main
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm run ${{ matrix.command }}
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
 
   minors:
     needs: [matrix, latest]
@@ -45,6 +46,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: ${{ fromJson(needs.matrix.outputs.minors) }}
         command:
@@ -53,17 +55,17 @@ jobs:
           - test:shams:getownpropertysymbols
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ljharb/actions/node/install@main
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm run ${{ matrix.command }}
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
 
   node:
-    name: 'node v16+'
+    name: 'node v16 - v17'
     needs: [latest, minors]
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo tests completed'
+      - run: true

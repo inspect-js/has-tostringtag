@@ -2,6 +2,9 @@ name: 'Tests: node.js (0.x)'
 
 on: [pull_request, push]
 
+permissions:
+  contents: read
+
 jobs:
   matrix:
     runs-on: ubuntu-latest
@@ -31,7 +34,7 @@ jobs:
           - test:shams:getownpropertysymbols
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ljharb/actions/node/install@main
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
@@ -39,7 +42,7 @@ jobs:
           cache-node-modules-key: node_modules-${{ github.workflow }}-${{ github.action }}-${{ github.run_id }}
           skip-ls-check: true
       - run: npm run ${{ matrix.command }}
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
 
   unstable:
     needs: [matrix, stable]
@@ -59,7 +62,7 @@ jobs:
           - test:shams:getownpropertysymbols
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ljharb/actions/node/install@main
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
@@ -67,11 +70,11 @@ jobs:
           cache-node-modules-key: node_modules-${{ github.workflow }}-${{ github.action }}-${{ github.run_id }}
           skip-ls-check: true
       - run: npm run ${{ matrix.command }}
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
 
   node:
     name: 'node 0.x'
     needs: [stable, unstable]
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo tests completed'
+      - run: true

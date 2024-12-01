@@ -2,6 +2,9 @@ name: 'Tests: node.js (v10 - v11)'
 
 on: [pull_request, push]
 
+permissions:
+  contents: read
+
 jobs:
   matrix:
     runs-on: ubuntu-latest
@@ -21,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: ${{ fromJson(needs.matrix.outputs.latest) }}
         command:
@@ -30,13 +34,13 @@ jobs:
           - test:shams:getownpropertysymbols
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ljharb/actions/node/install@main
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm run ${{ matrix.command }}
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
 
   minors:
     needs: [matrix, latest]
@@ -46,6 +50,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: ${{ fromJson(needs.matrix.outputs.minors) }}
         command:
@@ -55,17 +60,17 @@ jobs:
           - test:shams:getownpropertysymbols
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ljharb/actions/node/install@main
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm run ${{ matrix.command }}
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
 
   node:
     name: 'node v10 - v11'
     needs: [latest, minors]
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo tests completed'
+      - run: true
