@@ -18,7 +18,6 @@ test('polyfilled Symbols', function (t) {
 	/* eslint-disable global-require */
 	t.equal(hasSymbolToStringTag(), false, 'hasSymbolToStringTag is false before polyfilling');
 
-	// @ts-expect-error no types defined
 	require('get-own-property-symbols');
 
 	require('../tests')(t);
